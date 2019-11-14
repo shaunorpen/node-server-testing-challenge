@@ -14,20 +14,20 @@ server.get("/api/users", (req, res) => {
   res.status(200).json(users);
 });
 
-server.post("/api/users", (req, res) => {
-  const newUser = {
-    ...req.body,
-    id
-  };
-  users.push(newUser);
-  id++;
-  res.status(201).json(users);
-});
-
 server.get("/api/users/:id", (req, res) => {
   res
     .status(200)
     .json(users.filter(user => user.id === Number(req.params.id))[0]);
+});
+
+server.post("/api/users", (req, res) => {
+  const newUser = {
+    id,
+    ...req.body
+  };
+  users.push(newUser);
+  id++;
+  res.status(201).json(users);
 });
 
 server.put("/api/users/:id", (req, res) => {
